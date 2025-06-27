@@ -33,6 +33,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
                         member.realName,
                         member.phone,
                         member.email,
+                        member.status,
                         member.createdAt
                 ))
                 .from(member)

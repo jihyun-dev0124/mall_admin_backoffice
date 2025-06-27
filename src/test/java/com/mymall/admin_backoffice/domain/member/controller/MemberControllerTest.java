@@ -137,6 +137,10 @@ class MemberControllerTest {
     @Test
     public void 전체회원조회() throws Exception {
         saveMember("member1", "encoding", "회원1", "01012345678", "test@gmail.com");
+        MemberSearchCondition condition = MemberSearchCondition.builder()
+                                            .realName("회원1")
+                                            .build();
+
         mockMvc.perform(get("/api/members")
                 .param("realName", "회원1")
                 .param("page", "0")

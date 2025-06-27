@@ -2,13 +2,12 @@ package com.mymall.admin_backoffice.domain.member.dto.response;
 
 import com.mymall.admin_backoffice.domain.member.entity.Member;
 import com.mymall.admin_backoffice.domain.member.enums.MemberStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class MemberResponse {
@@ -29,15 +28,7 @@ public class MemberResponse {
                 .phone(member.getPhone())
                 .email(member.getEmail())
                 .status(member.getStatus())
+                .createdAt(member.getCreatedAt())
                 .build();
     }
-
-    /*public MemberResponse(Long id, String username, String realName, String phone, String email, LocalDateTime createdAt) {
-        this.id = id;
-        this.username = username;
-        this.realName = realName;
-        this.phone = phone;
-        this.email = email;
-        this.createdAt = createdAt;
-    }*/
 }

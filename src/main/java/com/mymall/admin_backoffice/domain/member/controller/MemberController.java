@@ -55,7 +55,7 @@ public class MemberController {
     }
 
     @GetMapping
-    public Page<MemberResponse> searchMembers(@RequestParam(required = false) MemberSearchCondition condition, Pageable pageable) {
+    public Page<MemberResponse> searchMembers(MemberSearchCondition condition, Pageable pageable) {
         return memberRepository.search(condition, pageable);
     }
 
