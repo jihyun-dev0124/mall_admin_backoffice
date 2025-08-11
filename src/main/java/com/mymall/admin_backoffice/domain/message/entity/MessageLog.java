@@ -2,7 +2,7 @@ package com.mymall.admin_backoffice.domain.message.entity;
 
 import com.mymall.admin_backoffice.domain.message.enums.MessageStatus;
 import com.mymall.admin_backoffice.domain.message.enums.MessageType;
-import com.mymall.admin_backoffice.domain.member.entity.AdminUser;
+import com.mymall.admin_backoffice.domain.admin.entity.AdminUser;
 import com.mymall.admin_backoffice.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

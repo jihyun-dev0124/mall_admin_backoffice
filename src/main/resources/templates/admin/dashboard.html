@@ -1,0 +1,85 @@
+<!-- templates/admin/dashboard.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head('관리자 대시보드')"></head>
+<body>
+<div th:replace="fragments/header :: nav('dashboard')"></div>
+
+<div class="container py-4">
+    <h2 class="mb-4">대시보드</h2>
+
+    <!-- 통계 카드 -->
+    <div class="row g-3">
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h6 class="text-muted">오늘 주문</h6>
+                    <div class="display-6" th:text="${stats.todayOrders}">0</div>
+                    <small class="text-success" th:text="'어제 대비 ' + ${stats.todayOrdersDelta} + '%'">+0%</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h6 class="text-muted">오늘 매출</h6>
+                    <div class="display-6" th:text="${#numbers.formatInteger(stats.todayRevenue, 0)}">0</div>
+                    <small class="text-muted">KRW</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h6 class="text-muted">신규 회원</h6>
+                    <div class="display-6" th:text="${stats.newMembers}">0</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h6 class="text-muted">재고 부족 상품</h6>
+                    <div class="display-6" th:text="${stats.lowStockProducts}">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 최근 주문 -->
+    <div class="card shadow-sm mt-4">
+        <div class="card-header">최근 주문</div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                    <tr>
+                        <th>주문번호</th>
+                        <th>회원</th>
+                        <th>금액</th>
+                        <th>상태</th>
+                        <th>일시</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="o : ${recentOrders}">
+                        <td th:text="${o.orderNo}">ORD0001</td>
+                        <td th:text="${o.memberName}">홍길동</td>
+                        <td th:text="${#numbers.formatInteger(o.amount,0)}">0</td>
+                        <td th:text="${o.status}">PAID</td>
+                        <td th:text="${#temporals.format(o.createdAt, 'yyyy-MM-dd HH:mm')}">-</td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(recentOrders)}">
+                        <td colspan="5" class="text-center text-muted py-3">최근 주문이 없습니다.</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

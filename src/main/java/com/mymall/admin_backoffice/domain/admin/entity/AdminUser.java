@@ -1,11 +1,10 @@
-package com.mymall.admin_backoffice.domain.member.entity;
+package com.mymall.admin_backoffice.domain.admin.entity;
 
-import com.mymall.admin_backoffice.domain.member.enums.UserRole;
+import com.mymall.admin_backoffice.domain.admin.enums.UserRole;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +12,9 @@ import java.time.LocalDateTime;
 @Table(name = "tb_admin_user")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
+@AllArgsConstructor
+@Builder
 public class AdminUser {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,4 +32,12 @@ public class AdminUser {
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
+
+    public static AdminUser create(String username, String encodedPassword, UserRole userRole){
+        return builder()
+                .username(username)
+                .password(encodedPassword)
+                .userRole(userRole)
+                .build();
+    }
 }
